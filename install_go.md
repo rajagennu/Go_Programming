@@ -12,3 +12,17 @@ export PATH=$PATH:/usr/local/go/bin
 go version
 ```
 
+
+### Go second installation
+
+- if you want to test your program against other versions of go just to test backward compatability through go promised backward comptability
+
+```bash
+go get golang.org/dl/go.1.15.6
+go.1.15.6 download
+
+# build & run
+go.1.15.6 run
+go.1.15.6 build
+
+```
