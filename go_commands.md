@@ -7,4 +7,4 @@
 	- binary will be stored at $GOPATH/bin location.
 	- go install will also covers the dependencies  required
 - `go fmt filename.go` will format source code automatically.
-- `goimports -l -w .` (goimports)[goimports.md]
+- `goimports -l -w .`  (goimports)[goimports.md]
