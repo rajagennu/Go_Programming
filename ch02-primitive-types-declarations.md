@@ -100,6 +100,74 @@ var d = y + float64(x)
 
 ### var and `:=` variable declaration
 
+- use `var` to declare variables.
+```go
+var x int = 10
+var x = 10
+var x, y int = 10, 20
+var x, y = 10, 20
+var x, y = 10, "hello"
+var (
+	a int
+	b = 20
+	c = "string"
+	d string
+)
+```
+all are valid. Once type assign it cant be changed.
+
+go also has another variable declaration format `:=`, its called as short declaration format. It can be used as equal to regular variable declaration format, but this only works in function level. In package level short declaration format is invalid and only `var` declaration format is allowed.
+
+`:=` create the variable if its not exist. So if you are thinking that you are reusing the variable you already declared, better confirm once or always define the variables which you might wanna reuse later with `var [type] [variable_name]`
+
+**Declare package level variable which wont change as your program executes. its hard to track changes of package level variables**
+
+
+### Using const
+
+`const` use to define immutable variables. syntax of `var` can be followed but you cant change the variable value once its defined with `const`
+
+```go
+const x int64 = 10
+const (
+	idKey = "id"
+	nameKey = "name"
+)
+```
+
+### typed and untyped constants
+
+if you define a constat untyped, this its give you flexiability to be used multiple places with different types. 
+for example
+
+```go
+const x = 10;
+
+var y int = x
+var z float64 = x
+var d byte = x
+
+```
+
+if you define a typed constant like
+```go
+
+const x int = 10
+// it can assigned to only integer type varaibles
+
+var y int = x // valid
+var z float64 = x // invalid
+var p byte = x // invalid
+```
+
+### Unused variables
+
+- unused variables will be catched and warned by Go compiler
+- unused constatns will be eliminated in the binary. 
+[Debugging Go in Runtime ](https://chetan177.medium.com/runtime-debugging-in-golang-b8a065d0fb5e)
+
+
+
 
 
 	
