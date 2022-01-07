@@ -11,3 +11,4 @@
 - [Data Types - Declarations](ch02-primitive-types-declarations.md)
 - [Arrays](arrays.md)
 - [Slices](slices.md)
+- [Make](make.md)

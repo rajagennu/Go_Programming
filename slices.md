@@ -69,7 +69,11 @@ func main() {
 - every slice has a capacity, which is the number of consecutive memory locations reserved. 
 - when ever a new element added, the capacity will be increase by 1. 
 - Remember, slice is a sequential list. if no enough capacity left sequentially then go runtime allocate a new slice and whole slice is copied to and next sequence element will be added. ((( This is going to cost good amount of memory and CPU, as we have to move entire slice duing no space cases.)))
-- 
+- so Go cameup with a new approach to save from this situation 
+`Go runtime usually increases a slice by more than one each time it runs out of capacity. The rules as of Go 1.14 are to double the size of the slice when the capacity is less than 1024 bytes, and then grow by atleast 25% afterward`
+- to get the current capacity of a slice use `cap` function. 
+- `cap` mostly used to check if a slice is large enough to hold new data, or if a call to `make` is needed to create a new slice. 
+- its always better to define your slices with specific size if you know the size available. To define the size of the slice while creating, we need to create the slice using `make`
 
 
 
