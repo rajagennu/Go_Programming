@@ -10,6 +10,7 @@
     data structure  -> delete
 
 ## Day 2
+- manage todos via command line args using flag module
 - saving Todo's into a file 
 - extended into go packages
 
