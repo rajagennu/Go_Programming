@@ -1,8 +1,9 @@
 package main
 
 import (
-	"encoding/json"
+	"bufio"
 	"fmt"
+	"os"
 	"time"
 )
 
@@ -15,20 +16,51 @@ type Todo struct {
 
 var Todos []Todo
 
-func (t Todo) createNewTodo() {
-	Todos = append(Todos, t)
+func (t *Todo) createNewTodo() {
+	Todos = append(Todos, *t)
+}
+
+func (t *Todo) updateTodo(desc string) {
+	t.Description = desc
+	fmt.Println(t)
+}
+
+func (t *Todo) delete() {
+	for index, value := range Todos {
+		if value.Description == t.Description {
+			Todos = append(Todos[0:index], Todos[index+1:]...) // 1,2,3,4,5 => 4 [0:3][4:]
+		}
+	}
+
+}
+
+func (t *Todo) markAsComplete() {
+	// Exercise
 }
 
 func main() {
 
-	var todo1 Todo = Todo{Description: "Task1", Status: "in_progress"}
-	todo1.createNewTodo()
+	for {
+		GetTodos()
+		fmt.Println("Please mention your operation\n1.Create\n2.Delete\n3.Update ")
+		scanner := bufio.NewScanner(os.Stdin)
+		_ = scanner.Scan()
+		input := scanner.Text()
 
-	todo2 := Todo{Description: "Task2", Status: "completed"}
-	todo2.createNewTodo()
+		switch input {
+		case "1":
+			createTodo()
 
-	GetTodos()
-	StoreIntoJSON(Todos)
+		case "2":
+			updateTodo()
+
+		case "3":
+			deleteTodo()
+
+		default:
+			fmt.Errorf("Invalid operation ID : %s ", input)
+		}
+	}
 
 }
 
@@ -40,21 +72,35 @@ func GetTodos() {
 	}
 }
 
-func StoreIntoJSON(todos []Todo) {
-	// marshal
-	result, err := json.Marshal(todos)
-	if err != nil {
-		fmt.Printf("Received error ")
-		return
-
+func createTodo() {
+	fmt.Println("Please enter todo description ")
+	todoInput := bufio.NewScanner(os.Stdin)
+	_ = todoInput.Scan()
+	todoDescription := todoInput.Text()
+	newTodo := Todo{
+		Description: todoDescription,
+		Status:      "in_progress",
+		Created_at:  time.Now(),
 	}
-	fmt.Println(string(result))
-	// unmarshal
-	var newTodos []Todo
-	err = json.Unmarshal(result, &newTodos)
-	if err != nil {
-		fmt.Println("Error while unmarshalling")
-	}
-	fmt.Println(newTodos)
+	newTodo.createNewTodo()
+}
 
+func updateTodo() {
+	// Exercise for next class
+	// by using bufio scanner read which todo number he wants to update
+	// and also ask for new description
+	// convert the string:: index into interger format
+	// once you get the index, you get the todo from slice Todos
+	// call todo.updateTodo()
+	// return
+}
+
+func deleteTodo() {
+	// Exercise for next class
+	// same as above but read only index, convert it into int, get the todo from Todos and call delete method
+}
+
+func markTodoAsComplete() {
+	// Exercise for next class
+	// also make sure to update todo completed_at time.
 }
